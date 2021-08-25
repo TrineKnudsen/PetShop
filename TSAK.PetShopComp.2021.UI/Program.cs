@@ -6,7 +6,8 @@ namespace TSAK.PetShopComp._2021.UI
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var menu = new PetMenu(repo);
+            menu.Start();
         }
     }
 }

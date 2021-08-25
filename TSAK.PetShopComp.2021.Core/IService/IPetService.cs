@@ -1,4 +1,6 @@
-﻿namespace TSAK.PetShopComp._2021.IService
+﻿using System.Collections.Generic;
+
+namespace TSAK.PetShopComp._2021.IService
 {
     public interface IPetService
     {
