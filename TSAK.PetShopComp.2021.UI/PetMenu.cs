@@ -1,11 +1,13 @@
 ﻿using System;
 using TSAK.PetShopComp._2021.IService;
+using TSAK.PetShopComp._2021.Model;
 
 namespace TSAK.PetShopComp._2021.UI
 {
     public class PetMenu 
     {
         private IPetService _service;
+        private IPetTypeService _typeService;
         public PetMenu(IPetService service)
         {
             _service = service;
@@ -36,17 +38,65 @@ namespace TSAK.PetShopComp._2021.UI
 
         private void createPet()
         {
-            Print("Welcome to the pet factory, please follow the instructions to create your new pet");
-            
-            Print("Please write the name for the pet");
-            string petName = Console.ReadLine();
             PrintNewLine();
+            Print(StringConstants.CreatePetGreeting);
+            Print(StringConstants.PetName);
+            var petName = Console.ReadLine();
             
-            Print("Please enter the color of the pet");
-            string petColor = Console.ReadLine();
+            Print(StringConstants.PetColor);
+            var petColor = Console.ReadLine();
+            
+            Print(StringConstants.PetBirthdate);
+            var petBirth = Console.ReadLine();
+            DateTime petBirthDate = DateTime.Parse(petBirth);
+            
+            Print(StringConstants.PetSoldDate);
+            var petSold = Console.ReadLine();
+            DateTime petSoldDate = DateTime.Parse(petSold);
+            
+            Print(StringConstants.PetPrice);
+            string petPrice = Console.ReadLine();
+            double petPriceParse = double.Parse(petPrice);
+            
+            
+            Print("Please select a pet type Id");
+            seeAllPetTypes();
+            var petType = Console.ReadLine();
+            int selection;
+            while (!int.TryParse(petType, out selection))
+            {
+                Print("whoopsie, you didn't type in a number! Try again!");
+                petType = Console.ReadLine();
+            }
+
+            while (_typeService.GetById(selection) == null)
+            {
+                Print("The Id you selected does not exist! Try again!");
+                petType = Console.ReadLine();
+            }
+
+            PetType pt = _typeService.GetById(selection);
+
+            var pet = new Pet
+            {
+                Name = petName,
+                Type = pt,
+                Price = petPriceParse,
+                Birthdate = petBirthDate,
+                SoldDate = petSoldDate
+            };
+            pet = _service.CreatePet(pet);
+            Print($"The pet was created! with these information: Id: {pet.Id.Value}, Name:{pet.Name}, Type: {pet.Type.Name} Birthdate: {pet.Birthdate}, Sold date: {pet.SoldDate}, Price: {pet.Price}");
             PrintNewLine();
-            
-            
+        }
+
+        private void seeAllPetTypes()
+        {
+            var petTypes = _typeService.GetAllPetTypes();
+            foreach (PetType p in petTypes)
+            {
+                Print($"Id: {p.Id.Value} - {p.Name}");
+            }
         }
 
         private void ReadAll()
@@ -55,7 +105,7 @@ namespace TSAK.PetShopComp._2021.UI
             var pets = _service.GetPets();
             foreach (var pet in pets)
             {
-                Print($"Id:{pet.Id}, Name:{pet.Name}, Type:{pet.Type.Name}, Birthdate:{pet.Birthdate}. Sold date:{pet.SoldDate}, Color:{pet.Color}, Price:{pet.Price}");
+                Print($"Id:{pet.Id.Value}, Name:{pet.Name}, Type:{pet.Type.Name}, Birthdate:{pet.Birthdate}. Sold date:{pet.SoldDate}, Color:{pet.Color}, Price:{pet.Price}");
             }
         }
 

@@ -18,5 +18,10 @@ namespace TSAK.PetShopComp._2021.Domain.Services
         {
             return _repo.ReadPets();
         }
+
+        public Pet CreatePet(Pet pet)
+        {
+            return _repo.AddPet(pet);
+        }
     }
 }

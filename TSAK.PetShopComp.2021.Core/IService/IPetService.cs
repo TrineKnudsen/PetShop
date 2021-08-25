@@ -6,5 +6,7 @@ namespace TSAK.PetShopComp._2021.IService
     public interface IPetService
     {
         List<Pet> GetPets();
+
+        Pet CreatePet(Pet pet);
     }
 }
