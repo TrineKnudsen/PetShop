@@ -5,4 +5,9 @@
         <RootNamespace>TSAK.PetShopComp._2021.Infrastructure.DataAccess</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\TSAK.PetShopComp.2021.Core\TSAK.PetShopComp.2021.Core.csproj" />
+      <ProjectReference Include="..\TSAK.PetShopComp.2021.Domain\TSAK.PetShopComp.2021.Domain.csproj" />
+    </ItemGroup>
+
 </Project>
