@@ -16,7 +16,7 @@ namespace TSAK.PetShopComp._2021.Domain.Services
 
         public List<Pet> GetPets()
         {
-            throw new System.NotImplementedException();
+            return _repo.ReadPets();
         }
     }
 }

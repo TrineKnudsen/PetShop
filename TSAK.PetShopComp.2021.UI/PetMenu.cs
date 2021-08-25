@@ -24,8 +24,38 @@ namespace TSAK.PetShopComp._2021.UI
             {
                 if (choice == 1)
                 {
-                    Print("Here you have the list");
+                    ReadAll();
                 }
+
+                if (choice == 2)
+                {
+                    createPet();
+                }
+            }
+        }
+
+        private void createPet()
+        {
+            Print("Welcome to the pet factory, please follow the instructions to create your new pet");
+            
+            Print("Please write the name for the pet");
+            string petName = Console.ReadLine();
+            PrintNewLine();
+            
+            Print("Please enter the color of the pet");
+            string petColor = Console.ReadLine();
+            PrintNewLine();
+            
+            
+        }
+
+        private void ReadAll()
+        {
+            Print("Here are all pets we have");
+            var pets = _service.GetPets();
+            foreach (var pet in pets)
+            {
+                Print($"Id:{pet.Id}, Name:{pet.Name}, Type:{pet.Type.Name}, Birthdate:{pet.Birthdate}. Sold date:{pet.SoldDate}, Color:{pet.Color}, Price:{pet.Price}");
             }
         }
 
@@ -53,6 +83,7 @@ namespace TSAK.PetShopComp._2021.UI
             PrintNewLine();
             Print(StringConstants.PleaseSelectMain);
             Print(StringConstants.ViewAllPets);
+            Print(StringConstants.CreatePet);
         }
 
         private void Print(string value)

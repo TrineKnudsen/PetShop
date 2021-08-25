@@ -5,5 +5,6 @@
         public const string WelcomeGreeting = "Welcome to the Petshop";
         public const string PleaseSelectMain = "Please select one of the Items below to continue";
         public const string ViewAllPets = "Select 1 to view all pets in the Pet shop";
+        public const string CreatePet = "Select 2 to create a new pet";
     }
 }
