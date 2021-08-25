@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TSAK.PetShopComp._2021
+namespace TSAK.PetShopComp._2021.UI
 {
     class Program
     {
