@@ -3,15 +3,14 @@ using TSAK.PetShopComp._2021.IService;
 
 namespace TSAK.PetShopComp._2021.UI
 {
-    public class PetMenu :IPetService
+    public class PetMenu 
     {
-        private IPetService _repo;
-        public PetMenu(IPetService repo)
+        private IPetService _service;
+        public PetMenu(IPetService service)
         {
-            _repo = repo;
+            _service = service;
         }
         
-
         public void Start()
         {
             ShowWelcomeGreeting();

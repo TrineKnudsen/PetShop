@@ -12,4 +12,8 @@
       <ProjectReference Include="..\TSAK.PetShopComp.2021.Infrastructure.DataAccess\TSAK.PetShopComp.2021.Infrastructure.DataAccess.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
+    </ItemGroup>
+
 </Project>
