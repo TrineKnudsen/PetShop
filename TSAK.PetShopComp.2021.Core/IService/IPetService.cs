@@ -8,5 +8,16 @@ namespace TSAK.PetShopComp._2021.IService
         List<Pet> GetPets();
 
         Pet CreatePet(Pet pet);
+
+        Pet UpdatePet(Pet petUpdate);
+
+        Pet FindPetById(int id);
+
+        Pet deletePet(int id);
+
+        List<Pet> SearchByType(PetType type);
+
+        List<Pet> Get5Cheapest();
+        
     }
 }

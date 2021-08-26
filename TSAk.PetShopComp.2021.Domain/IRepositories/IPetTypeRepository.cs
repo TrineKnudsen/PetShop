@@ -8,5 +8,7 @@ namespace TSAK.PetShopComp._2021.Domain.IRepositories
         List<PetType> GetAllPetTypes();
         
         PetType GetById(int id);
+        
+        
     }
 }

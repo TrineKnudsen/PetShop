@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using TSAK.PetShopComp._2021.Model;
 
 namespace TSAK.PetShopComp._2021.IService
@@ -9,6 +10,7 @@ namespace TSAK.PetShopComp._2021.IService
         List<PetType> GetAllPetTypes();
 
         PetType GetById(int id);
-        }
+       
+    }
         
     }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using TSAK.PetShopComp._2021.Domain.IRepositories;
 using TSAK.PetShopComp._2021.IService;
 using TSAK.PetShopComp._2021.Model;
@@ -22,6 +23,11 @@ namespace TSAK.PetShopComp._2021.Domain.Services
         public PetType GetById(int id)
         {
             return _repo.GetById(id);
+        }
+
+        public IEnumerable SearchByType(PetType typeSearch)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

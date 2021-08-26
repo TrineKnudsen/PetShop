@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TSAK.PetShopComp._2021.IService;
 using TSAK.PetShopComp._2021.Model;
 
@@ -6,6 +7,7 @@ namespace TSAK.PetShopComp._2021.UI
 {
     public class PetMenu 
     {
+        private static List<Pet> pets = new List<Pet>();
         private IPetService _service;
         private IPetTypeService _typeService;
         public PetMenu(IPetService service, IPetTypeService typeService)
@@ -32,62 +34,93 @@ namespace TSAK.PetShopComp._2021.UI
 
                 if (choice == 2)
                 {
-                    createPet();
+                    CreatePet();
                 }
 
                 if (choice == 3)
                 {
-                    updatePet();
+                    UpdatePet();
                 }
 
                 if (choice == 4)
                 {
-                    deletePet();
+                    DeletePet();
                 }
 
                 if (choice == 5)
                 {
-                    searchByType();
+                    SearchByType();
                 }
 
                 if (choice == 6)
                 {
-                    sortByPrice();
-                }
-
-                if (choice == 7)
-                {
-                    GetFiveCheapestPets();
+                    Get5Cheapest();
                 }
             }
         }
 
-        private void GetFiveCheapestPets()
+        private void Get5Cheapest()
         {
-            throw new NotImplementedException();
+            Print(StringConstants.CheapestPets);
+            foreach (var pet in _service.Get5Cheapest())
+            {
+                Print($"Price: {pet.Price}, Type: {pet.Type.Name}, Name: {pet.Name}, Color: {pet.Color}, Birthdate: {pet.Birthdate}");
+            }
+        }
+        
+
+        private void SearchByType()
+        {
+            Print(StringConstants.WriteType);
+            var typeSearch = Console.ReadLine();
+
+            foreach (var pet in _service.SearchByType())
+            {
+                Print($"Id: {pet.Id}, Name: {pet.Name}, Color: {pet.Color}, Birthday: {pet.Birthdate}, Sold: {pet.SoldDate}, Price: {pet.Price} ");
+            }
         }
 
-        private void sortByPrice()
+        private void DeletePet()
         {
-            throw new NotImplementedException();
+            Print(StringConstants.PetToDelete);
+            ReadAll();
+            var idDelete = int.Parse(Console.ReadLine());
+            if (idDelete != null)
+            {
+                _service.deletePet(idDelete);
+                Print($"Pet with this id: {idDelete}, was successfully deleted from the list");
+            }
+           
         }
 
-        private void searchByType()
+        private void UpdatePet()
         {
-            throw new NotImplementedException();
+            Print(StringConstants.TypeId);
+            ReadAll();
+            int idUpdate = int.Parse(Console.ReadLine());
+            var petUpdate = _service.FindPetById(idUpdate);
+            
+            Print(StringConstants.NewName);
+            var newName = Console.ReadLine();
+            
+            Print(StringConstants.NewPrice);
+            var newPrice = double.Parse(Console.ReadLine());
+
+            _service.UpdatePet(new Pet()
+                {
+                Id = petUpdate.Id,
+                Name = newName,
+                Price = newPrice,
+                Color = petUpdate.Color,
+                Birthdate = petUpdate.Birthdate,
+                SoldDate = petUpdate.SoldDate,
+                Type = petUpdate.Type
+                }
+            );
+            Print($"Pet was updated! New name: {petUpdate.Name} and New price: {petUpdate.Price}");
         }
 
-        private void deletePet()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void updatePet()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void createPet()
+        private void CreatePet()
         {
             PrintNewLine();
             Print(StringConstants.CreatePetGreeting);
@@ -137,8 +170,28 @@ namespace TSAK.PetShopComp._2021.UI
                 SoldDate = petSoldDate
             };
             pet = _service.CreatePet(pet);
-            Print($"The pet was created! with these information: Id: {pet.Id.Value}, Name:{pet.Name}, Color: {pet.Color}, Type: {pet.Type.Name}, Birthdate: {pet.Birthdate}, Sold date: {pet.SoldDate}, Price: {pet.Price}");
+            Print($"The pet was created! with these information: Id: {pet.Id}, Name:{pet.Name}, Color: {pet.Color}, Type: {pet.Type.Name}, Birthdate: {pet.Birthdate}, Sold date: {pet.SoldDate}, Price: {pet.Price}");
             PrintNewLine();
+        }
+
+        private static Pet FindPetById()
+        {
+            Console.WriteLine("Insert pet Id: ");
+            int id;
+            while (!int.TryParse(Console.ReadLine(), out id))
+            {
+                Console.WriteLine("Please insert a number");
+            }
+
+            foreach (var pet in pets)
+            {
+                if (pet.Id == id)
+                {
+                   return pet;
+                }
+            }
+
+            return null;
         }
 
         private void seeAllPetTypes()
@@ -153,10 +206,9 @@ namespace TSAK.PetShopComp._2021.UI
         private void ReadAll()
         {
             Print("Here are all pets we have");
-            var pets = _service.GetPets();
-            foreach (var pet in pets)
+            foreach (var pet in _service.GetPets())
             {
-                Print($"Id:{pet.Id.Value}, Name:{pet.Name}, Type:{pet.Type.Name}, Birthdate:{pet.Birthdate}. Sold date:{pet.SoldDate}, Color:{pet.Color}, Price:{pet.Price}");
+                Print($"Id:{pet.Id}, Name:{pet.Name}, Type:{pet.Type.Name}, Birthdate:{pet.Birthdate}. Sold date:{pet.SoldDate}, Color:{pet.Color}, Price:{pet.Price}");
             }
         }
 
@@ -185,6 +237,10 @@ namespace TSAK.PetShopComp._2021.UI
             Print(StringConstants.PleaseSelectMain);
             Print(StringConstants.ViewAllPets);
             Print(StringConstants.CreatePet);
+            Print(StringConstants.UpdatePet);
+            Print(StringConstants.PetDelete);
+            Print(StringConstants.SearchType);
+            Print(StringConstants.Get5Cheapest);
         }
 
         private void Print(string value)

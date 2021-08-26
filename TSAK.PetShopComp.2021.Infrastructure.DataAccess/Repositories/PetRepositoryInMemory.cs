@@ -8,7 +8,7 @@ namespace TSAK.PetShopComp._2021.Infrastructure.DataAccess.Repositories
     public class PetRepositoryInMemory : IPetRepository
     {
         private static List<Pet> _petTable = new List<Pet>();
-        private static int nextId = 1;
+        private static int _id = 1;
 
         public PetRepositoryInMemory()
         {
@@ -41,25 +41,72 @@ namespace TSAK.PetShopComp._2021.Infrastructure.DataAccess.Repositories
                 SoldDate = DateTime.Now, Type = snake, Price = 1_000
             };
             
+            Pet pet5 = new Pet
+            {
+                Name = "Perry", Color = "Blue", Birthdate = DateTime.Now,
+                SoldDate = DateTime.Now, Type = snake, Price = 1_200
+            };
+            
+            Pet pet6 = new Pet
+            {
+                Name = "Tom", Color = "Grey", Birthdate = DateTime.Now,
+                SoldDate = DateTime.Now, Type = cat, Price = 350
+            };
+            
             AddPet(pet1);
             AddPet(pet2);
             AddPet(pet3);
             AddPet(pet4);
-
+            AddPet(pet5);
+            AddPet(pet6);
         }
-        public List<Pet> ReadPets()
+        public IEnumerable<Pet> ReadPets()
         {
             return _petTable;
         } 
         public Pet AddPet(Pet pet)
         {
-            pet.Id = nextId;
+            pet.Id = _id++;
             _petTable.Add(pet);
-
-            nextId++;
             return pet;
         }
 
+        public Pet ReadById(int id)
+        {
+            foreach (var pet in _petTable)
+            {
+                if (pet.Id == id)
+                {
+                    return pet;
+                }
+            }
+            
+            return null;
+        }
         
+        public Pet Update(Pet petUpdate)
+        {
+            var pet = ReadById(petUpdate.Id);
+            if (pet != null)
+            {
+                pet.Name = petUpdate.Name;
+                pet.Price = petUpdate.Price;
+                return pet;
+            }
+
+            return null;
+        }
+
+        public Pet Delete(int id)
+        {
+            var petFound = ReadById(id);
+            if (petFound != null)
+            {
+                _petTable.Remove(petFound);
+                return petFound;
+            }
+
+            return null;
+        } 
     }
 }
