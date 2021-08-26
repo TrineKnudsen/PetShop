@@ -8,9 +8,10 @@ namespace TSAK.PetShopComp._2021.UI
     {
         private IPetService _service;
         private IPetTypeService _typeService;
-        public PetMenu(IPetService service)
+        public PetMenu(IPetService service, IPetTypeService typeService)
         {
             _service = service;
+            _typeService = typeService;
         }
         
         public void Start()
@@ -33,7 +34,57 @@ namespace TSAK.PetShopComp._2021.UI
                 {
                     createPet();
                 }
+
+                if (choice == 3)
+                {
+                    updatePet();
+                }
+
+                if (choice == 4)
+                {
+                    deletePet();
+                }
+
+                if (choice == 5)
+                {
+                    searchByType();
+                }
+
+                if (choice == 6)
+                {
+                    sortByPrice();
+                }
+
+                if (choice == 7)
+                {
+                    GetFiveCheapestPets();
+                }
             }
+        }
+
+        private void GetFiveCheapestPets()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void sortByPrice()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void searchByType()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void deletePet()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void updatePet()
+        {
+            throw new NotImplementedException();
         }
 
         private void createPet()
@@ -72,7 +123,7 @@ namespace TSAK.PetShopComp._2021.UI
             while (_typeService.GetById(selection) == null)
             {
                 Print("The Id you selected does not exist! Try again!");
-                petType = Console.ReadLine();
+                Console.ReadLine();
             }
 
             PetType pt = _typeService.GetById(selection);
@@ -86,7 +137,7 @@ namespace TSAK.PetShopComp._2021.UI
                 SoldDate = petSoldDate
             };
             pet = _service.CreatePet(pet);
-            Print($"The pet was created! with these information: Id: {pet.Id.Value}, Name:{pet.Name}, Type: {pet.Type.Name} Birthdate: {pet.Birthdate}, Sold date: {pet.SoldDate}, Price: {pet.Price}");
+            Print($"The pet was created! with these information: Id: {pet.Id.Value}, Name:{pet.Name}, Color: {pet.Color}, Type: {pet.Type.Name}, Birthdate: {pet.Birthdate}, Sold date: {pet.SoldDate}, Price: {pet.Price}");
             PrintNewLine();
         }
 
