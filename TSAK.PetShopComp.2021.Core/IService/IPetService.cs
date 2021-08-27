@@ -15,7 +15,7 @@ namespace TSAK.PetShopComp._2021.IService
 
         Pet deletePet(int id);
 
-        List<Pet> SearchByType(PetType type);
+        List<Pet> SearchByType(string type);
 
         List<Pet> Get5Cheapest();
         

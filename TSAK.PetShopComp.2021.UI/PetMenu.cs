@@ -74,7 +74,7 @@ namespace TSAK.PetShopComp._2021.UI
             Print(StringConstants.WriteType);
             var typeSearch = Console.ReadLine();
 
-            foreach (var pet in _service.SearchByType())
+            foreach (var pet in _service.SearchByType(typeSearch))
             {
                 Print($"Id: {pet.Id}, Name: {pet.Name}, Color: {pet.Color}, Birthday: {pet.Birthdate}, Sold: {pet.SoldDate}, Price: {pet.Price} ");
             }

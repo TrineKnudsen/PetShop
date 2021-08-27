@@ -46,10 +46,10 @@ namespace TSAK.PetShopComp._2021.Domain.Services
             return _repo.Delete(id);
         }
 
-        public List<Pet> SearchByType(PetType type)
+        public List<Pet> SearchByType(string type)
         {
             var list = _repo.ReadPets();
-            var searchEnumerable = list.Where(p => p.Type == type);
+            var searchEnumerable = list.Where(p => p.Type.Name == type);
 
             return searchEnumerable.ToList();
         }
