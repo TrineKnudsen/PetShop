@@ -29,5 +29,17 @@ namespace TSAK.PetShop2021.WebApi.Controllers
         {
             return _petService.GetPets();
         }
+
+        [HttpPut]
+        public Pet Update(Pet petToUpdate)
+        {
+            return _petService.UpdatePet(petToUpdate);
+        }
+        
+        [HttpDelete]
+        public Pet Delete(int id)
+        {
+            return _petService.deletePet(id);
+        }
     }
 }
