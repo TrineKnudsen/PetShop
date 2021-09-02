@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\TSAK.PetShopComp.2021.Core\TSAK.PetShopComp.2021.Core.csproj" />
+      <ProjectReference Include="..\TSAK.PetShopComp.2021.Domain\TSAK.PetShopComp.2021.Domain.csproj" />
+      <ProjectReference Include="..\TSAK.PetShopComp.2021.Infrastructure.DataAccess\TSAK.PetShopComp.2021.Infrastructure.DataAccess.csproj" />
+    </ItemGroup>
+
+</Project>
