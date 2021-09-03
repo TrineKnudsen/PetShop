@@ -6,7 +6,7 @@ using TSAK.PetShopComp._2021.Model;
 
 namespace TSAK.PetShop2021.WebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/pets")]
     [ApiController]
     
     public class PetsController : ControllerBase
@@ -19,20 +19,24 @@ namespace TSAK.PetShop2021.WebApi.Controllers
         }
         
         [HttpPost]
-        public Pet Create(Pet pet)
+        public ActionResult<Pet> Create([FromBody] Pet pet)
         {
-            return _petService.CreatePet(pet);
+            return Created($"https//:localhost/api/pets/{pet.Id}",_petService.CreatePet(pet));
         }
 
         [HttpGet]
-        public List<Pet> GetAll()
+        public ActionResult<List<Pet>> GetAll()
         {
-            return _petService.GetPets();
+            return Ok(_petService.GetPets());
         }
 
-        [HttpPut]
-        public Pet Update(Pet petToUpdate)
+        [HttpPut ("{id}")]
+        public ActionResult <Pet>Update(long id, [FromBody] Pet petToUpdate)
         {
+            if (petToUpdate.Id != id)
+            {
+                return BadRequest("Id does not match");
+            }
             return _petService.UpdatePet(petToUpdate);
         }
         
