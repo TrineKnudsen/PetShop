@@ -28,11 +28,11 @@ namespace TSAK.PetShopComp._2021.UI
             var typeServiceProvider = serviceCollection.BuildServiceProvider();
             var typeService = typeServiceProvider.GetRequiredService<IPetTypeService>();
             var ownerServiceProvider = serviceCollection.BuildServiceProvider();
-            var ownerService = ownerServiceProvider.GetRequiredService<IPetService>();
+            var ownerService = ownerServiceProvider.GetRequiredService<IOwnerService>();
 
 
 
-            var menu = new StartMenu(service, typeService);
+            var menu = new StartMenu(service, typeService, ownerService);
             menu.Start();
 
             Console.ReadLine();

@@ -9,10 +9,11 @@ namespace TSAK.PetShopComp._2021.UI
         private IPetTypeService _typeService;
         private IOwnerService _serviceOwner;
 
-        public StartMenu(IPetService service, IPetTypeService typeService)
+        public StartMenu(IPetService service, IPetTypeService typeService, IOwnerService ownerService)
         {
             _service = service;
             _typeService = typeService;
+            _serviceOwner = ownerService;
         }
         public void Start()
         {
