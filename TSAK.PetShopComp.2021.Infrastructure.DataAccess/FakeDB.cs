@@ -9,6 +9,7 @@ namespace TSAK.PetShopComp._2021.Infrastructure.DataAccess
         private static List<PetType> _fakeDBPetTypes = new List<PetType>();
         private static int _id = 1;
 
-       
+        private static List<Owner> _fakeDBOwners = new List<Owner>();
+        private static int _idOwner = 1;
     }
 }

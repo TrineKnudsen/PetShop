@@ -5,7 +5,11 @@
         public const string WelcomeGreeting = "Welcome to the Petshop";
         public const string PleaseSelectMain = "Please select one of the Items below to continue";
         
-        //Menu
+        //MainMenu
+        public const string PetMenu = "Select 1 to go to the pet menu";
+        public const string OwnerMenu = "Select 2 to go to the owner menu";
+        
+        //PetMenu
         public const string ViewAllPets = "Select 1 to view all pets in the Pet shop";
         public const string CreatePet = "Select 2 to create a new pet";
         public const string UpdatePet = "Select 3 to edit pet name and price";
@@ -36,5 +40,23 @@
 
         public const string CheapestPets = "This is the 5 cheapest pets available at the moment";
         
+        //OwnerMenu
+        public const string CreateOwner = "Select 1 to create a new owmer";
+        public const string ViewOwners = "Select 2 to view all owners";
+        public const string UpdateOwner = "Select 3 update owner";
+        public const string DeleteOwner = "Select 4 to delete an owner";
+        
+        
+        //UpdateOwner
+        public const string NewOwnerEmail ="Please enter the new email of the owner"; 
+        public const string NewOwnerAddress ="Please enter the new address of the owner"; 
+        public const string TypeIdOwner ="Please type in the id of the owner you want to update";
+        //DeleteOwner
+        public const string OwnerToDelete = "Please select the id of the owner you want to delete";
+        //CreateOwner
+        public const string CreateOwnerGreeting = "Welcome to the owner factory, please follow the instructions to create a new owner";
+        public const string OwnerName = "Please type the name of the owner";
+        public const string OwmerEmail = "Please type the Email of the owner";
+        public const string OwnerAddress = "Please type the address of the owner";
     }
 }

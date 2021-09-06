@@ -20,14 +20,19 @@ namespace TSAK.PetShopComp._2021.UI
             serviceCollection.AddScoped<IPetService, PetService>();
             serviceCollection.AddScoped<IPetTypeRepository, PetTypeRepositoryInMemory>();
             serviceCollection.AddScoped<IPetTypeService, PetTypeService>();
+            serviceCollection.AddScoped<IOwnerRepository, OwnerRepository>();
+            serviceCollection.AddScoped<IOwnerService, OwnerService>();
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
             var service = serviceProvider.GetRequiredService<IPetService>();
             var typeServiceProvider = serviceCollection.BuildServiceProvider();
             var typeService = typeServiceProvider.GetRequiredService<IPetTypeService>();
-            
-            
-            var menu = new PetMenu(service, typeService);
+            var ownerServiceProvider = serviceCollection.BuildServiceProvider();
+            var ownerService = ownerServiceProvider.GetRequiredService<IPetService>();
+
+
+
+            var menu = new StartMenu(service, typeService);
             menu.Start();
 
             Console.ReadLine();

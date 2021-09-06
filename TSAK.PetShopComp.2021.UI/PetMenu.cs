@@ -7,7 +7,7 @@ namespace TSAK.PetShopComp._2021.UI
 {
     public class PetMenu 
     {
-        private static List<Pet> pets = new List<Pet>();
+        private static List<Pet> pets;
         private IPetService _service;
         private IPetTypeService _typeService;
         public PetMenu(IPetService service, IPetTypeService typeService)
@@ -16,13 +16,12 @@ namespace TSAK.PetShopComp._2021.UI
             _typeService = typeService;
         }
         
-        public void Start()
+        public void StartPetMenu()
         {
-            ShowWelcomeGreeting();
-            StartLoop();
+            StartPetLoop();
         }
         
-        private void StartLoop()
+        private void StartPetLoop()
         {
             int choice;
             while ((choice = GetMainMenuSelection()) != 0)
@@ -167,7 +166,8 @@ namespace TSAK.PetShopComp._2021.UI
                 Type = pt,
                 Price = petPriceParse,
                 Birthdate = petBirthDate,
-                SoldDate = petSoldDate
+                SoldDate = petSoldDate,
+                Color = petColor
             };
             pet = _service.CreatePet(pet);
             Print($"The pet was created! with these information: Id: {pet.Id}, Name:{pet.Name}, Color: {pet.Color}, Type: {pet.Type.Name}, Birthdate: {pet.Birthdate}, Sold date: {pet.SoldDate}, Price: {pet.Price}");
@@ -247,10 +247,6 @@ namespace TSAK.PetShopComp._2021.UI
         {
             Console.WriteLine(value);
         }
-
-        private void ShowWelcomeGreeting()
-                {
-                    Print(StringConstants.WelcomeGreeting);
-                }
+        
     }
 }
