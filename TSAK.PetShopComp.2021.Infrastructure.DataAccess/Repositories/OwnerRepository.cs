@@ -7,7 +7,7 @@ namespace TSAK.PetShopComp._2021.Infrastructure.DataAccess.Repositories
 {
     public class OwnerRepository : IOwnerRepository
     {
-        private static List<Owner> _ownersTable;
+        private static List<Owner> _ownersTable = new List<Owner>();
         private static int _idOwner = 1;
 
         public OwnerRepository()
