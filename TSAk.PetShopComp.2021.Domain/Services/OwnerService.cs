@@ -9,11 +9,13 @@ namespace TSAK.PetShopComp._2021.Domain.Services
 {
     public class OwnerService : IOwnerService
     {
-        private IOwnerRepository _ownerRepo;
+        readonly IOwnerRepository _ownerRepo;
+        readonly IPetRepository _petRepo;
 
-        public OwnerService(IOwnerRepository ownerRepo)
+        public OwnerService(IOwnerRepository ownerRepo, IPetRepository petRepository)
         {
             _ownerRepo = ownerRepo;
+            _petRepo = petRepository;
         }
         public List<Owner> GetOwners()
         {
@@ -47,6 +49,13 @@ namespace TSAK.PetShopComp._2021.Domain.Services
         {
             return _ownerRepo.ReadById(idUpdate);
         }
-        
+
+        public Owner FindOwnerByIdIncludePets(int id)
+        {
+            var owner = _ownerRepo.ReadById(id);
+            owner.Pets = _petRepo.ReadPets()
+                .Where(pet => pet.Owner.Id == owner.Id).ToList();
+            return owner;
+        }
     }
 }

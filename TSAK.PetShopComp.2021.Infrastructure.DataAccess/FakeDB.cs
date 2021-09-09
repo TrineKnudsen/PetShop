@@ -5,11 +5,13 @@ namespace TSAK.PetShopComp._2021.Infrastructure.DataAccess
 {
     public class FakeDB
     {
-        private static List<Pet> _fakeDBPets = new List<Pet>();
-        private static List<PetType> _fakeDBPetTypes = new List<PetType>();
-        private static int _id = 1;
+        public static List<Pet> pets = new List<Pet>();
+        public static int _id = 1;
+        
+        public static List<PetType> petTypes = new List<PetType>();
+        public static int _typeId = 1;
 
-        private static List<Owner> _fakeDBOwners = new List<Owner>();
-        private static int _idOwner = 1;
+        public static List<Owner> owners = new List<Owner>();
+        public static int _idOwner = 1;
     }
 }

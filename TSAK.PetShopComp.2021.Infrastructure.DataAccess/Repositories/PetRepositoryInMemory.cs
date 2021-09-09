@@ -14,51 +14,88 @@ namespace TSAK.PetShopComp._2021.Infrastructure.DataAccess.Repositories
         {
             PetType alpaca = new PetType {Id = 1, Name = "Alpaca"};
             PetType cat = new PetType {Id = 2, Name = "Cat"};
-            PetType dog = new PetType {Id = 3, Name = "Dog"};
-            PetType snake = new PetType {Id = 4, Name = "Snake"};
+            PetType dog = new PetType {Id = 3, Name = "Dog"}; 
+            PetType snake = new PetType {Id = 4, Name = "Snake"}; 
             
-            Pet pet1 = new Pet
+            if (FakeDB.pets.Count > 0) return;
+            var pet1 = new Pet()
             {
-                Name = "Carla", Color = "Brown", Birthdate = DateTime.Now,
-                SoldDate = DateTime.Now, Type = alpaca, Price = 500.55
+                Id = FakeDB._id++,
+                Price = 200,
+                Type = alpaca,
+                Birthdate = DateTime.Now.AddDays(200),
+                SoldDate = DateTime.Now.AddDays(150),
+                Name = "Carla",
+                Color = "Brown",
+                Owner = new Owner(){Id = 1}
             };
+            FakeDB.pets.Add(pet1);
             
-            Pet pet2 = new Pet
+            var pet2 = new Pet()
             {
-                Name = "Whiskers", Color = "Black", Birthdate = DateTime.Now,
-                SoldDate = DateTime.Now, Type = cat, Price = 200
+                Id = FakeDB._id++,
+                Price = 150,
+                Type = cat,
+                Birthdate = DateTime.Now.AddDays(100),
+                SoldDate = DateTime.Now.AddDays(20),
+                Name = "Whiskers",
+                Color = "Black",
+                Owner = new Owner(){Id = 2}
             };
+            FakeDB.pets.Add(pet2);
             
-            Pet pet3 = new Pet
+            var pet3 = new Pet()
             {
-                Name = "Pluto", Color = "Orange", Birthdate = DateTime.Now,
-                SoldDate = DateTime.Now, Type = dog, Price = 300
-            }; 
-            
-            Pet pet4 = new Pet
-            {
-                Name = "Nagini", Color = "Green", Birthdate = DateTime.Now,
-                SoldDate = DateTime.Now, Type = snake, Price = 1_000
+                Id = FakeDB._id++,
+                Price = 300,
+                Type = dog,
+                Birthdate = DateTime.Now.AddDays(365),
+                SoldDate = DateTime.Now.AddDays(260),
+                Name = "Pluto",
+                Color = "Orange",
+                Owner = new Owner(){Id = 2}
             };
+            FakeDB.pets.Add(pet3);
             
-            Pet pet5 = new Pet
+            var pet4 = new Pet()
             {
-                Name = "Perry", Color = "Blue", Birthdate = DateTime.Now,
-                SoldDate = DateTime.Now, Type = snake, Price = 1_200
+                Id = FakeDB._id++,
+                Price = 1000,
+                Type = snake,
+                Birthdate = DateTime.Now.AddDays(450),
+                SoldDate = DateTime.Now.AddDays(100),
+                Name = "Nagini",
+                Color = "Green",
+                Owner = new Owner(){Id = 1}
             };
+            FakeDB.pets.Add(pet4);
             
-            Pet pet6 = new Pet
+            var pet5 = new Pet()
             {
-                Name = "Tom", Color = "Grey", Birthdate = DateTime.Now,
-                SoldDate = DateTime.Now, Type = cat, Price = 350
+                Id = FakeDB._id++,
+                Price = 1200,
+                Type = snake,
+                Birthdate = DateTime.Now.AddDays(230),
+                SoldDate = DateTime.Now.AddDays(220),
+                Name = "Perry",
+                Color = "Blue",
+                Owner = new Owner(){Id = 1}
             };
+            FakeDB.pets.Add(pet5);
             
-            AddPet(pet1);
-            AddPet(pet2);
-            AddPet(pet3);
-            AddPet(pet4);
-            AddPet(pet5);
-            AddPet(pet6);
+            var pet6 = new Pet()
+            {
+                Id = FakeDB._id++,
+                Price = 350,
+                Type = cat,
+                Birthdate = DateTime.Now.AddDays(150),
+                SoldDate = DateTime.Now.AddDays(99),
+                Name = "Tom",
+                Color = "Grey",
+                Owner = new Owner(){Id = 2}
+            };
+            FakeDB.pets.Add(pet6);
+            
         }
         public IEnumerable<Pet> ReadPets()
         {
@@ -66,8 +103,8 @@ namespace TSAK.PetShopComp._2021.Infrastructure.DataAccess.Repositories
         } 
         public Pet AddPet(Pet pet)
         {
-            pet.Id = _id++;
-            _petTable.Add(pet);
+            pet.Id = FakeDB._id++;
+            FakeDB.pets.Add(pet);
             return pet;
         }
 
