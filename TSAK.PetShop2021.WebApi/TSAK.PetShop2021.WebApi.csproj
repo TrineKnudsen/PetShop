@@ -5,6 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.10" />
         <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
     </ItemGroup>
@@ -12,6 +13,7 @@
     <ItemGroup>
       <ProjectReference Include="..\TSAK.PetShopComp.2021.Core\TSAK.PetShopComp.2021.Core.csproj" />
       <ProjectReference Include="..\TSAK.PetShopComp.2021.Domain\TSAK.PetShopComp.2021.Domain.csproj" />
+      <ProjectReference Include="..\TSAK.PetShopComp.2021.EF\TSAK.PetShopComp.2021.EF.csproj" />
       <ProjectReference Include="..\TSAK.PetShopComp.2021.Infrastructure.DataAccess\TSAK.PetShopComp.2021.Infrastructure.DataAccess.csproj" />
     </ItemGroup>
 
