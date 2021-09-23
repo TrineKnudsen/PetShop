@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using TSAK.PetShopComp._2021.Domain.IRepositories;
-using TSAK.PetShopComp._2021.EF;
 using TSAK.PetShopComp._2021.EF.Entities;
 using TSAK.PetShopComp._2021.Model;
 
-namespace TSAK.PetShopComp._2021.Infrastructure.DataAccess.Repositories
+namespace TSAK.PetShopComp._2021.EF.Repositories
 {
     public class PetRepository : IPetRepository
     {

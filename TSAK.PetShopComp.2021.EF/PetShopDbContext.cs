@@ -12,6 +12,10 @@ namespace TSAK.PetShopComp._2021.EF
             modelBuilder.Entity<PetEntity>()
                 .HasOne(petEntity => petEntity.Insurance)
                 .WithMany(insuranceEntity => insuranceEntity.Pets);
+            
+            modelBuilder.Entity<PetEntity>()
+                .HasOne(petEntity => petEntity.Owner)
+                .WithMany(ownerEntity => ownerEntity.Pets);
                 
                 
             modelBuilder.Entity<InsuranceEntity>().HasData(new InsuranceEntity {Id = 1, Name = "SafeScuff", Price = 22});
@@ -22,6 +26,7 @@ namespace TSAK.PetShopComp._2021.EF
         public DbSet<InsuranceEntity> Insurances { get; set; }
         public DbSet<PetEntity> Pets { get; set; }
         public DbSet<OwnerEntity> Owners{ get; set; }
+        
         public DbSet<PetTypeEntity> PetTypes { get; set; }
     }
 }

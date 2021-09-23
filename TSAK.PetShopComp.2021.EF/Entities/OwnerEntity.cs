@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TSAK.PetShopComp._2021.EF.Entities
 {
@@ -11,5 +12,8 @@ namespace TSAK.PetShopComp._2021.EF.Entities
         public string Address { get; set; }
 
         public string Email { get; set; }
+
+        public List<PetEntity> Pets { get; set; }
+        
     }
 }
