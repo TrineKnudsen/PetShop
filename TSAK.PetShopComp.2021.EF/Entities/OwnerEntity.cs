@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace TSAK.PetShopComp._2021.Model
+namespace TSAK.PetShopComp._2021.EF.Entities
 {
-    public class Owner
+    public class OwnerEntity
     {
         public int Id { get; set; }
         
@@ -12,8 +11,5 @@ namespace TSAK.PetShopComp._2021.Model
         public string Address { get; set; }
 
         public string Email { get; set; }
-
-        public List<Pet> Pets { get; set; }
-        
     }
 }

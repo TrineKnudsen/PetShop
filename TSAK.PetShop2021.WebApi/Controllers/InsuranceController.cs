@@ -49,5 +49,52 @@ namespace TSAK.PetShop2021.WebApi.Controllers
             }
             
         } 
+        
+        [HttpGet]
+        public ActionResult<List<Insurance>> GetAll()
+        {
+            try
+            {
+                return Ok(_insuranceService.ReadAll());
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, "Fuck");
+            }
+            
+        }
+        
+        [HttpDelete("{id}")]
+        public ActionResult<Insurance> Delete(int id)
+        {
+            try
+            {
+                return Ok(_insuranceService.Delete(id));
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, "Fuck");
+            }
+            
+        }
+        
+        [HttpPut("{id}")]
+        public ActionResult<Insurance> Update(long id, [FromBody] Insurance insurance)
+        {
+            try
+            {
+                if (insurance.Id != id)
+                {
+                    return BadRequest("Id does not match");
+                }
+
+                return Ok(_insuranceService.Update(insurance));
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, "Fuck");
+            }
+            
+        }
     } 
 }
