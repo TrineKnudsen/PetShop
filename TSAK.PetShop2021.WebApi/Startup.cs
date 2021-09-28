@@ -16,7 +16,6 @@ using TSAK.PetShopComp._2021.Domain.IRepositories;
 using TSAK.PetShopComp._2021.Domain.Services;
 using TSAK.PetShopComp._2021.EF;
 using TSAK.PetShopComp._2021.EF.Repositories;
-using TSAK.PetShopComp._2021.Infrastructure.DataAccess.Repositories;
 using TSAK.PetShopComp._2021.IService;
 
 namespace TSAK.PetShop2021.WebApi
@@ -52,13 +51,13 @@ namespace TSAK.PetShop2021.WebApi
                         .UseSqlite("Data Source=petShop.db");
                 });
 
-            services.AddScoped<IPetRepository, PetRepositoryInMemory>();
+            services.AddScoped<IPetRepository, PetRepository>();
             services.AddScoped<IPetService, PetService>();
             
-            services.AddScoped<IPetTypeRepository, PetTypeRepositoryInMemory>();
+            services.AddScoped<IPetTypeRepository, PetTypeRepository>();
             services.AddScoped<IPetTypeService, PetTypeService>();
             
-            services.AddScoped<IOwnerRepository, OwnerRepository>();
+            services.AddScoped<IOwnerRepository, OwnerRepo>();
             services.AddScoped<IOwnerService, OwnerService>();
             
             services.AddScoped<IInsuranceRepository, InsuranceRepository>();

@@ -17,7 +17,7 @@ namespace TSAK.PetShopComp._2021.Infrastructure.DataAccess.Repositories
             _petTypeTable.AddRange(new List<PetType>{alpaca, cat, dog, snake});
         }
 
-        public List<PetType> GetAllPetTypes()
+        public IEnumerable<PetType> GetAllPetTypes()
         {
             return _petTypeTable;
         }
@@ -33,6 +33,21 @@ namespace TSAK.PetShopComp._2021.Infrastructure.DataAccess.Repositories
             }
 
             return null;
+        }
+
+        public PetType DeletePetType(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public PetType UpdatePetType(PetType typeUpdate)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public PetType CreatePetType(PetType type)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

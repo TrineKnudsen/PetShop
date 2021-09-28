@@ -5,10 +5,13 @@ namespace TSAK.PetShopComp._2021.Domain.IRepositories
 {
     public interface IPetTypeRepository
     {
-        List<PetType> GetAllPetTypes();
+        IEnumerable<PetType> GetAllPetTypes();
         
         PetType GetById(int id);
-        
-        
+
+
+        PetType DeletePetType(int id);
+        PetType UpdatePetType(PetType typeUpdate);
+        PetType CreatePetType(PetType type);
     }
 }
