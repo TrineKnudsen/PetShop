@@ -20,7 +20,15 @@ namespace TSAK.PetShop2021.WebApi.Controllers
         {
             _petTypeService = petTypeService;
         }
-        
+
+        [HttpGet("{id}")]
+        public ActionResult<PetType> Get(int id)
+        {
+            if (id < 1) return BadRequest("Id must be greater than 0");
+            return _petTypeService.GetById(id);
+            
+            }
+
         [HttpPost]
         public ActionResult<PetType> Create([FromBody] PetType petType)
         {
