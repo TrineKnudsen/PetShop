@@ -50,12 +50,12 @@ namespace TSAK.PetShopComp._2021.Domain.Services
             return _ownerRepo.ReadById(idUpdate);
         }
 
-        public Owner FindOwnerByIdIncludePets(int id)
+       /* public Owner FindOwnerByIdIncludePets(int id)
         {
             var owner = _ownerRepo.ReadById(id);
-            owner.Pets = _petRepo.ReadPets()
+            owner.Pets = _petRepo.ReadPets(filter)
                 .Where(pet => pet.Owner.Id == owner.Id).ToList();
             return owner;
-        }
+        }*/
     }
 }

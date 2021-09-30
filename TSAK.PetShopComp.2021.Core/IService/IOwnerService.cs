@@ -16,6 +16,6 @@ namespace TSAK.PetShopComp._2021.IService
         
         Owner FindOwnerById(int idUpdate);
         
-        Owner FindOwnerByIdIncludePets(int id);
+        //Owner FindOwnerByIdIncludePets(int id);
     }
 }

@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using TSAK.PetShopComp._2021.Filtering;
 using TSAK.PetShopComp._2021.Model;
 
 namespace TSAK.PetShopComp._2021.IService
 {
     public interface IPetService
     {
-        List<Pet> GetPets();
+        List<Pet> GetPets(Filter filter);
 
         Pet CreatePet(Pet pet);
 
@@ -15,9 +16,9 @@ namespace TSAK.PetShopComp._2021.IService
 
         Pet deletePet(int id);
 
-        List<Pet> SearchByType(string type);
+        //List<Pet> SearchByType(string type);
 
-        List<Pet> Get5Cheapest();
+        //List<Pet> Get5Cheapest();
         
     }
 }

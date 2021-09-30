@@ -2,6 +2,7 @@
 using System.Linq;
 using TSAK.PetShopComp._2021.Domain.IRepositories;
 using TSAK.PetShopComp._2021.EF.Entities;
+using TSAK.PetShopComp._2021.Filtering;
 using TSAK.PetShopComp._2021.Model;
 
 namespace TSAK.PetShopComp._2021.EF.Repositories
@@ -15,9 +16,9 @@ namespace TSAK.PetShopComp._2021.EF.Repositories
             _ctx = ctx;
         }
 
-        public IEnumerable<Pet> ReadPets()
+        public IEnumerable<Pet> ReadPets(Filter filter)
         {
-            return _ctx.Pets
+            var selectQuery = _ctx.Pets
                 .Select(pe => new Pet
                 {
                     Id = pe.Id,
@@ -25,7 +26,51 @@ namespace TSAK.PetShopComp._2021.EF.Repositories
                     Birthdate = pe.Birthdate,
                     SoldDate = pe.SoldDate,
                     Price = pe.Price
-                }).ToList();
+                });
+            if (filter.OrderDir.ToLower().Equals("asc"))
+            {
+                switch (filter.OrderBy.ToLower())
+                {
+                    case "name":
+                        selectQuery = selectQuery.OrderBy(p => p.Name);
+                        break;
+                    case "id":
+                        selectQuery = selectQuery.OrderBy(p => p.Id);
+                        break;
+                    case "price":
+                        selectQuery = selectQuery.OrderBy(p => p.Price);
+                        break;
+                    
+                }
+            }
+            else
+            {
+                switch (filter.OrderBy.ToLower())
+                {
+                    case "name":
+                        selectQuery = selectQuery.OrderByDescending(p => p.Name);
+                        break;
+                    case "id":
+                        selectQuery = selectQuery.OrderByDescending(p => p.Id);
+                        break;
+                    case "price":
+                        selectQuery = selectQuery.OrderByDescending(p => p.Price);
+                        break;
+                }
+            }
+
+            selectQuery = selectQuery.Where(p => p.Name.ToLower().StartsWith(filter.Search.ToLower()));
+            var query = selectQuery
+                .Skip((filter.Page - 1) * filter.Limit)
+                .Take(filter.Limit);
+
+            return query.ToList();
+
+        }
+
+        public int TotalCount()
+        {
+            return _ctx.Pets.Count();
         }
 
         public Pet AddPet(Pet pet)

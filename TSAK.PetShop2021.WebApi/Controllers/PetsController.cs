@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using TSAK.PetShopComp._2021.Filtering;
 using TSAK.PetShopComp._2021.IService;
 using TSAK.PetShopComp._2021.Model;
 
@@ -25,9 +26,9 @@ namespace TSAK.PetShop2021.WebApi.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Pet>> GetAll()
+        public ActionResult<List<Pet>> GetAll(Filter filter)
         {
-            return Ok(_petService.GetPets());
+            return Ok(_petService.GetPets(filter));
         }
 
         [HttpPut ("{id}")]

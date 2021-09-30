@@ -36,8 +36,8 @@ namespace TSAK.PetShop2021.WebApi.Controllers
         public ActionResult<Owner> Get(int id)
         {
             if (id < 1) return BadRequest("Id must be greater than 0");
-            //return _ownerService.FindOwnerById(id);
-            return _ownerService.FindOwnerByIdIncludePets(id);
+            return _ownerService.FindOwnerById(id);
+            
         }
 
         [HttpPut("{id}")]
