@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TSAK.PetShop2021.WebApi.Dto;
+using TSAK.PetShopComp._2021.Filtering;
 using TSAK.PetShopComp._2021.IService;
 using TSAK.PetShopComp._2021.Model;
 
@@ -51,11 +53,24 @@ namespace TSAK.PetShop2021.WebApi.Controllers
         } 
         
         [HttpGet]
-        public ActionResult<List<Insurance>> GetAll()
+        public ActionResult<List<Insurance>> GetAll([FromQuery]Filter filter)
         {
             try
             {
-                return Ok(_insuranceService.ReadAll());
+                var list = _insuranceService.ReadAll(filter);
+                return Ok(new GetAllInsurancesDto
+                {
+                    List = list.Select(i => new GetInsuranceDto
+                    {
+                        Id = i.Id,
+                        Name = i.Name,
+                        Price = i.Price
+                    }).ToList()
+                });
+            }
+            catch (ArgumentException e)
+            {
+                return BadRequest(e.Message);
             }
             catch (Exception e)
             {

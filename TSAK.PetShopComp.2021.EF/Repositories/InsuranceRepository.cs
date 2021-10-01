@@ -2,6 +2,7 @@
 using System.Linq;
 using TSAK.PetShopComp._2021.Domain.IRepositories;
 using TSAK.PetShopComp._2021.EF.Entities;
+using TSAK.PetShopComp._2021.Filtering;
 using TSAK.PetShopComp._2021.Model;
 
 namespace TSAK.PetShopComp._2021.EF.Repositories
@@ -44,16 +45,52 @@ namespace TSAK.PetShopComp._2021.EF.Repositories
             };
         }
 
-        public List<Insurance> ReadAll()
+        public List<Insurance> ReadAll(Filter filter)
         {
-            return _ctx.Insurances
-                .Select(i => new Insurance
+            var selectQuery = _ctx.Insurances
+                .Select(ie => new Insurance
                 {
-                    Id = i.Id,
-                    Name = i.Name,
-                    Price = i.Price
-                })
-                .ToList();
+                    Id = ie.Id,
+                    Name = ie.Name,
+                    Price = ie.Price
+                });
+            if (filter.OrderDir.ToLower().Equals("asc"))
+            {
+                switch (filter.OrderBy.ToLower())
+                {
+                    case "name":
+                        selectQuery = selectQuery.OrderBy(i => i.Name);
+                        break;
+                    case "id":
+                        selectQuery = selectQuery.OrderBy(i => i.Id);
+                        break;
+                    case "price":
+                        selectQuery = selectQuery.OrderBy(i => i.Price);
+                        break;
+                }
+            }
+            else
+            {
+                switch (filter.OrderBy.ToLower())
+                {
+                    case "name":
+                        selectQuery = selectQuery.OrderByDescending(i => i.Name);
+                        break;
+                    case "id":
+                        selectQuery = selectQuery.OrderByDescending(i => i.Id);
+                        break;
+                    case "price":
+                        selectQuery = selectQuery.OrderByDescending(i => i.Price);
+                        break;
+                }
+            }
+
+            selectQuery = selectQuery.Where(i => i.Name.ToLower().StartsWith(filter.Search.ToLower()));
+            var query = selectQuery
+                .Skip((filter.Page - 1) * filter.Limit)
+                .Take(filter.Limit);
+            return query.ToList();
+            
         }
 
         public Insurance Delete(int id)
@@ -82,6 +119,11 @@ namespace TSAK.PetShopComp._2021.EF.Repositories
                 Name = entity.Name,
                 Price = entity.Price
             };
+        }
+
+        public int TotalCount()
+        {
+            return _ctx.Insurances.Count();
         }
     }
 }

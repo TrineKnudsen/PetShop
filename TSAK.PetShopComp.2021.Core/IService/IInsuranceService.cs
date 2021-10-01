@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TSAK.PetShopComp._2021.Filtering;
 using TSAK.PetShopComp._2021.Model;
 
 namespace TSAK.PetShopComp._2021.IService
@@ -9,7 +10,7 @@ namespace TSAK.PetShopComp._2021.IService
         
         Insurance Create(Insurance insurance);
 
-        List<Insurance> ReadAll();
+        List<Insurance> ReadAll(Filter filter);
         
         Insurance Delete(int id);
         

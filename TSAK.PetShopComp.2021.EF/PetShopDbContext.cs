@@ -13,7 +13,7 @@ namespace TSAK.PetShopComp._2021.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-           /* var random = new Random();
+           /*var random = new Random();
             var names = new List<string> {"Karlo", "Børge", "Ged"};
             var price = new List<double> {255, 400, 500};
             for (var i = 1; i < 1000; i++)
@@ -63,6 +63,6 @@ namespace TSAK.PetShopComp._2021.EF
         public DbSet<PetEntity> Pets { get; set; }
         public DbSet<OwnerEntity> Owners { get; set; }
         public DbSet<PetTypeEntity> PetTypes { get; set; }
-    
-        }
+
+    }
     }

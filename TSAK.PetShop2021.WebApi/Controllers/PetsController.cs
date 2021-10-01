@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using TSAK.PetShop2021.WebApi.Dto;
 using TSAK.PetShopComp._2021.Filtering;
 using TSAK.PetShopComp._2021.IService;
 using TSAK.PetShopComp._2021.Model;
@@ -26,9 +29,29 @@ namespace TSAK.PetShop2021.WebApi.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Pet>> GetAll(Filter filter)
+        public ActionResult<List<Pet>> GetAll([FromQuery]Filter filter)
         {
-            return Ok(_petService.GetPets(filter));
+            try
+            {
+                var list = _petService.GetPets(filter);
+                return Ok(new GetAllPetsDto
+                {
+                    List = list.Select(p => new GetPetDto
+                    {
+                        Id = p.Id,
+                        Name = p.Name
+                    }).ToList()
+                });
+            }
+            catch (ArgumentException e)
+            {
+                return BadRequest(e.Message);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, "FUCK");
+            }
+            
         }
 
         [HttpPut ("{id}")]
